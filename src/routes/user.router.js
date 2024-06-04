@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 /* const UserModel = require("../models/user.model.js");
 const { createHash } = require("../utils/hashbcryp.js"); */
@@ -58,6 +58,15 @@ router.post("/", passport.authenticate("register", {
     res.redirect("/profile");
 
 })
+
+// Ruta para autenticación con GitHub
+router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+
+// Callback de GitHub después de la autenticación
+router.get('/github/callback', passport.authenticate('github', {
+    successRedirect: '/products',
+    failureRedirect: '/login'
+}));
 
 router.get("/failedregister", (req, res) => {
     res.send("Registro Fallido!");

@@ -1,11 +1,15 @@
+import ('dotenv').config();
 const passport = require("passport");
+const LocalStrategy = require('passport-local').Strategy;
 const local = require("passport-local");
 const GitHubStrategy = require("passport-github2");
 const UserModel = require("../models/user.model");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { createHash, isValidPassword } = require("../utils/hashbcryp");
 
 
-const LocalStrategy = local.Strategy;
+const cartService = require("../services/cart.service.js");
+const CartModel = require("../models/cart.model.js"); 
 
 const initializePassport = () => {
     //Vamos a armar nuestras estrategias: Registro y Login. 
@@ -69,6 +73,7 @@ const initializePassport = () => {
         }
     }))
 
+
     //Serializar y deserializar: 
 
     passport.serializeUser((user, done) => {
@@ -79,6 +84,34 @@ const initializePassport = () => {
         let user = await UserModel.findById({ _id: id });
         done(null, user);
     })
+
+    //Estrategia para iniciar sesion con google
+
+    passport.use('google', new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://localhost:8080/api/sessions/google/callback'
+    }, async (accessToken, refreshToken, profile, done) => {
+        try {
+            let user = await userModel.findOne({ email: profile.emails[0].value });
+            if (!user) {
+                const newCart = await CartModel.create({ products: [], quantity:0 });
+                await newCart.save();
+                let newUser = {
+                    first_name: profile.name.givenName,
+                    last_name: profile.name.familyName,
+                    email: profile.emails[0].value,
+                    age: 18,
+                    cart: newCart._id,
+                    password: createHash('google')
+                };
+                user = await userModel.create(newUser);
+            }
+            return done(null, user);
+        } catch (error) {
+            return done(error);
+        }
+    }));
 
     //Acá generamos la nueva estrategia con GitHub: 
 

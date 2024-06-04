@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 const passport = require("passport");
 
@@ -84,5 +84,25 @@ router.get("/githubcallback", passport.authenticate("github", {
     req.session.login = true;
     res.redirect("/profile");
 })
+
+// Ruta para autenticacion con Google
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/google/callback', passport.authenticate('google', {
+    failureRedirect: '/login'
+}), (req, res) => {
+    console.log('Usuario autenticado en callback:', req.user);
+    res.redirect('/products');
+});
+
+
+//Ruta current(obtiene el usuario actual)
+router.get('/current', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('profile', { user: req.user });
+    } else {
+        res.status(401).json({ message: 'Usuario no autenticado' });
+    }
+});
 
 module.exports = router; 
