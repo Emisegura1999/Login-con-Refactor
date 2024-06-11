@@ -1,52 +1,215 @@
-/* Estilos para el encabezado */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+/* Estilos del contenedor principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-/* Estilos para el formulario */
-form {
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* Estilos generales para los elementos */
+body, h2, p, input, button {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
+/* Estilos para los títulos */
+h1, h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-button[type="submit"]:hover {
-    background-color: #45a049;
+/* Estilos para los encabezados */
+h3 {
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilos para el contenedor de la cabecera */
+.headerContainer {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Estilos para el contenedor de productos */
-#contenedorProductos {
+#productsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+/* Estilos generales para las tarjetas */
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 200px;
+    height: 250px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el título del producto */
+.card .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilos para el precio del producto */
+.card .price {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+/* Estilos para el botón de eliminar */
+.card .delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Estilos para el hover del botón de eliminar*/
+.card .delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Estilos del formulario */
+.formContainer {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+/* Estilos del contenedor de mensajes */
+.messageContainer {
+    max-height: 300px;
+    max-width: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    margin: 20px;
+}
+
+/* Estilos del contenedor de login y registro */
+.loginContainer {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 300px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label, input, button {
+    margin-bottom: 10px;
+}
+
+/* Estilos para los botones */
+.btn {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.oauth-btn {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d4d1d3;
+    border-radius: 7px;
+    background-color: transparent;
+    color: #333;
+    font-weight: 550;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+/* Estilos para el texto de redireccionamiento */
+.redirect {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.redirect a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.redirect a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la información del perfil */
+.profile-info {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
     margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+
+/* Estilos para el botón de perfil */
+a.button {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    width: 150px;
+}
+
+a.button:hover {
+    background-color: #45a049;
 }

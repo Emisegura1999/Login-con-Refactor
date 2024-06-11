@@ -38,7 +38,7 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
       mongoUrl: mongo_url,
-      ttl: 1 * 24 * 60 * 60  // Tiempo de vida de la sesión en segundos (1 dia en este caso)
+      ttl: 1 * 24 * 60 * 60  
   })
 }));
 
@@ -90,7 +90,6 @@ io.on("connection",  (socket) => {
       //Guardo el mensaje en MongoDB: 
       await MessageModel.create(data);
 console.log("Mensaje recibido", data)
-      //Obtengo los mensajes de MongoDB y se los paso al cliente: 
       const messages = await MessageModel.find();
       console.log(messages);
       io.sockets.emit("messagesLogs", messages);
@@ -111,14 +110,12 @@ io.on("connection", async (socket) => {
     // Recibe el evento deleteProduct desde el cliente
     socket.on("removeProduct", async (id) => {
         await productService.deleteProduct(id);
-        // Envía el array de productos actualizados
         socket.emit("products", await productService.getProducts());
     });
 
     // Recibe el evento addProduct desde el cliente
     socket.on("addProduct", async (product) => {
         await productManager.addProduct(product);
-        // Envía el array de productos actualizados
         socket.emit("products", await productManager.getProducts());
     });
 });
@@ -130,7 +127,7 @@ const cartService = require("./services/cart.service.js");
 io.on("connection", async (socket) => {
     console.log("Un cliente conectado");
 
-    // Envía los datos del carrito al cliente cuando se conecta
+s
     socket.emit("cart", await cartService.getProductsFromCart());
 });
 

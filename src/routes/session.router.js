@@ -46,8 +46,6 @@ router.get("/logout", (req, res) => {
 
 //Version para passport
 
-//VERSION PARA PASSPORT: 
-
 router.post("/login", passport.authenticate("login", {
     failureRedirect: "/api/sessions/faillogin"
 }), async (req, res) => {
@@ -96,7 +94,7 @@ router.get('/google/callback', passport.authenticate('google', {
 });
 
 
-//Ruta current(obtiene el usuario actual)
+//Ruta current
 router.get('/current', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('profile', { user: req.user });

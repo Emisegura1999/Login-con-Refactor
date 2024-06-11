@@ -12,17 +12,15 @@ const cartService = require("../services/cart.service.js");
 const CartModel = require("../models/cart.model.js"); 
 
 const initializePassport = () => {
-    //Vamos a armar nuestras estrategias: Registro y Login. 
+    
 
     passport.use("register", new LocalStrategy({
-        //Le digo que quiero acceder al objeto request
         passReqToCallback: true,
         usernameField: "email"
     }, async (req, username, password, done) => {
         const { first_name, last_name, email, age } = req.body;
 
         try {
-            //Verificamos si ya existe un registro con ese email: 
             let usuario = await UserModel.findOne({ email });
 
             if (usuario) {
@@ -52,7 +50,6 @@ const initializePassport = () => {
     }, async (email, password, done) => {
 
         try {
-            //Primero verifico si existe un usuario con ese email: 
             let usuario = await UserModel.findOne({ email });
 
             if (!usuario) {
@@ -120,7 +117,6 @@ const initializePassport = () => {
         clientSecret: "0032f5ee0904164141dbf69b9d33d037607dff15",
         callbackURL: "http://localhost:8080/api/sessions/githubcallback"
     }, async (accessToken, refreshToken, profile, done) => {
-        //Veo los datos del perfil
         console.log("Profile:", profile);
 
         try {

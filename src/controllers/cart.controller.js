@@ -12,7 +12,6 @@ exports.createCart = async (req, res) => {
 exports.getCartById = async (req, res) => {
     try {
         const cart = await cartService.getCartById(req.params.id);
-        // console.log('Cart desde getCartById:', JSON.stringify(cart, null, 2)); //esta linea la usé para controlar que recibia de cart y que no me imprima [object object]
         res.render('carts', { cart });
     } catch (error) {
         res.status(404).json({ message: error.message });

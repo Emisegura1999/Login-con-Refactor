@@ -1,7 +1,5 @@
 import express from "express";
 const router = express.Router();
-/* const UserModel = require("../models/user.model.js");
-const { createHash } = require("../utils/hashbcryp.js"); */
 const passport = require("passport");
 
 //Post para generar un usuario y almacenarlo en MongoDB:
@@ -37,7 +35,7 @@ const passport = require("passport");
 
 
 //Version para Passport:
-//(estrategia local)
+
 
 router.post("/", passport.authenticate("register", {
     failureRedirect: "/failedregister"
